@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Outlook Add-In</title>
-    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    <script src="https://witwerdexius.github.io/WeeklyReport/src/taskpane/taskpane.js"></script>
-</head>
-<body>
-    <br>
-    <button id="createEmail">Termine der Woche senden</button>
-</body>
-</html>
+<button id="myButton">Klicken Sie hier</button>
+
+<script>
+    document.getElementById("myButton").addEventListener("click", function() {
+        console.log("Button wurde geklickt!");
+        performOutlookAction();
+    });
+
+    function performOutlookAction() {
+        // Beispiel: Zugriff auf die E-Mail-Inhalte
+        Office.context.mailbox.item.body.getAsync("text", function(result) {
+            if (result.status === Office.AsyncResultStatus.Succeeded) {
+                console.log("E-Mail-Inhalt:", result.value);
+            } else {
+                console.error("Fehler beim Abrufen des Inhalts:", result.error);
+            }
+        });
+    }
+</script>
